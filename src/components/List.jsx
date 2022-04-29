@@ -12,10 +12,11 @@ export default function List(){
        setQuotes(quotes)
        if(search){
 
-            const filteredQuotes = quotes.filter((quote) => quote.character
+            const filteredQuotes = quotes.filter(quote => quote.character
             .includes(search));
             setQuotes(filteredQuotes)
         }
+        
         setSearch('')
     }
 
@@ -28,22 +29,20 @@ export default function List(){
                 quote: quote.quote,
                 character: quote.character,
             }));
-        
             setQuotes(quotes)
-           
         }
         getAllQuotes();
 
         },[])
-       if(loading){
 
+       if(loading){
             return(
                 <>
                 <form onSubmit = {handleSearch}>
                     <label>Character
-                        <input type='text' value={search} onChange={e => setSearch(e.target.value)}></input>
+                        <input type='text' value={search} onChange={e => setSearch(e.target.value)} />
+                        </label>
                         <button>Search</button>
-                    </label>
                 </form>
 
                 {search
@@ -53,10 +52,8 @@ export default function List(){
                         <h2>Name: {quote.character}</h2>
                         <h3>Quote: {quote.quote}</h3>
                         </div>
-
                     )
                 })
-
                 : quotes.map((quote, i) => {
                return(
                 <div>

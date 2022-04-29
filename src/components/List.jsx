@@ -8,8 +8,9 @@ export default function List(){
     const [searchedQuotes, setSearchedQuotes] = useState([]);
 
     function handleSearch(e){
-        e.preventDefault()
-       setQuotes(quotes)
+        setSearch(e.target.value);
+        onSearch(e.target.value)
+    
        if(search){
 
             const filteredQuotes = quotes.filter(quote => quote.character
@@ -28,15 +29,14 @@ export default function List(){
             const quotes = result.map((quote) => ({
                 quote: quote.quote,
                 character: quote.character,
-            }));
+            }))
             setQuotes(quotes)
         }
         getAllQuotes();
 
-        },[])
-
-       if(loading){
-            return(
+        },[]);
+    if(loading){
+            return (
                 <>
                 <form onSubmit = {handleSearch}>
                     <label>Character
@@ -61,8 +61,8 @@ export default function List(){
                 <h3>Quote: {quote.quote}</h3>
                 </div>
                )
-                })
+    })
             }
 </>
     
-            )}}
+            )}};

@@ -8,16 +8,16 @@ export default function List(){
     const [searchedQuotes, setSearchedQuotes] = useState([]);
 
     function handleSearch(e){
-        setSearch(e.target.value);
-        onSearch(e.target.value)
-    
+    e.preventDefault()
+ 
        if(search){
-
-            const filteredQuotes = quotes.filter(quote => quote.character
+            const filteredQuotes = quotes.filter((quote) => quote.character
+            .toLowerCase(search)
             .includes(search));
-            setQuotes(filteredQuotes)
+            setSearchedQuotes(filteredQuotes)
+
+            return filteredQuotes;
         }
-        
         setSearch('')
     }
 

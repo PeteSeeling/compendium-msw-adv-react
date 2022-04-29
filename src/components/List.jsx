@@ -40,7 +40,7 @@ export default function List(){
                 <>
                 <form onSubmit = {handleSearch}>
                     <label>Character
-                        <input type='text' value={search} onChange={e => setSearch(e.target.value)} />
+                        <input aria-label='Search' type='text' value={search} onChange={e => setSearch(e.target.value)} />
                         </label>
                         <button>Search</button>
                 </form>

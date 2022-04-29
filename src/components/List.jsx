@@ -42,14 +42,14 @@ export default function List(){
                     <label>Character
                         <input aria-label='Search' type='text' value={search} onChange={e => setSearch(e.target.value)} />
                         </label>
-                        <button>Search</button>
+                        <button aria-label='button'>Search</button>
                 </form>
 
                 {search
                 ? searchedQuotes.map((quote, i) => {
                     return(
                         <div>
-                        <h2>Name: {quote.character}</h2>
+                        <h2 aria-label='character'>Name: {quote.character}</h2>
                         <h3>Quote: {quote.quote}</h3>
                         </div>
                     )

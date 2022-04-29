@@ -17,15 +17,18 @@ import App from './App'
     it('Should test the behavior of the app', async () => {
         render(<List />);
 
-        const search = screen.getByLabelText(/Search/i)
+        const search = screen.getByLabelText(/Search/i);
+        const button = screen.getByLabelText(/button/i);
 
         userEvent.type(search, 'Fry');
+        userEvent.click(button);
+     
+        
+        const result = await screen.getByLabelText(/character/i)
+      
 
-        return waitFor(() => {
-            const result = screen.getByRole('textbox', {Name:/Fry/i})
-
-            expect(result).toEqual('Fry')
+            expect(result.value).toEqual('Fry')
         })
-    })
+
 
     

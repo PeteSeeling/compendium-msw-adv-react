@@ -1,11 +1,12 @@
-import { screen, render, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { screen, render} from '@testing-library/react'
+
 import userEvent from '@testing-library/user-event'
 import List from './components/List'
+import { rest } from 'msw'
 
 import App from './App'
 
-
+describe('Component and Behavior Tests', () =>{
  test('Should test to ensure a character, character quote and search button are displayed (components)', async () => {
         render(<List />);
 
@@ -14,7 +15,7 @@ import App from './App'
         const searchButton = screen.getByText(/search/i, {selector: 'button'})
     })
 
-    it('Should test the behavior of the app', async () => {
+    it('Should test the character fry returns after a user searches for fry', async () => {
         render(<List />);
 
         const search = screen.getByLabelText(/Search/i);
@@ -30,5 +31,5 @@ import App from './App'
             expect(result.value).toEqual('Fry')
         })
 
-
+    })
     

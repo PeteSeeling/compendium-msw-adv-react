@@ -1,17 +1,27 @@
-import { screen, render} from '@testing-library/react'
-
+import { screen, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import List from './components/List'
+import { setupServer } from 'msw/node';
 import { rest } from 'msw'
+import { futuramaData } from './views/futuramaData';
 
-import App from './App'
+const server = setupServer(
+    rest.get('https://futuramaapi.herokuapp.com/api/quotes', (req, res, ctx) => {
+        return res(ctx.json(futuramaData))
+    })
+);
 
-describe('Component and Behavior Tests', () =>{
+describe('list', () => {
+    beforeAll(() => server.listen());
+    afterAll(() => server.close());
+
+
  test('Should test to ensure a character, character quote and search button are displayed (components)', async () => {
         render(<List />);
 
         await screen.getByRole('textbox', {Name: /Bender/i})
         await screen.getByRole('textbox', {Quote: /A grim day for robot-kind. But we can always build more killbots./i})
+
         const searchButton = screen.getByText(/search/i, {selector: 'button'})
     })
 
@@ -23,13 +33,10 @@ describe('Component and Behavior Tests', () =>{
 
         userEvent.type(search, 'Fry');
         userEvent.click(button);
-     
         
         const result = await screen.getByLabelText(/character/i)
       
-
-            expect(result.value).toEqual('Fry')
+        expect(result.value).toEqual('Fry')
         })
-
     })
     

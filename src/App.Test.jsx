@@ -22,9 +22,8 @@ describe('list', () => {
         await screen.findByText(/Loading/i);
       waitForElementToBeRemoved(await screen.findByText(/Loading/i));
 
-
-        await screen.getByRole('textbox', {Name: /Bender/i})
-        await screen.getByRole('textbox', {Quote: /A grim day for robot-kind. But we can always build more killbots./i})
+      screen.getByRole('textbox', {Name: /Bender/i})
+     screen.getByRole('textbox', {Quote: /A grim day for robot-kind. But we can always build more killbots./i})
 
    
         const searchButton = await screen.getByText(/search/i, {selector: 'button'})
@@ -39,13 +38,10 @@ describe('list', () => {
         const search = screen.findByLabelText(/Search/i);
         const button = screen.findByLabelText(/button/i);
 
-
-   
-        await userEvent.type(search, 'Fry');
+      userEvent.type(search, 'Fry');
        
         waitFor(() => {
         const result = screen.getByLabelText(/character/i)
-      
         expect(result.value).toEqual('Fry')
         })
         })

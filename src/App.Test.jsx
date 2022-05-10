@@ -1,4 +1,4 @@
-import { screen, render, waitForElementToBeRemoved, waitFor } from '@testing-library/react'
+import { screen, render, waitForElementToBeRemoved, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import List from './components/List'
 import { setupServer } from 'msw/node';
@@ -23,11 +23,11 @@ describe('list', () => {
       waitForElementToBeRemoved(await screen.findByText(/Loading/i));
 
 
-
         await screen.getByRole('textbox', {Name: /Bender/i})
         await screen.getByRole('textbox', {Quote: /A grim day for robot-kind. But we can always build more killbots./i})
 
-        const searchButton = screen.getByText(/search/i, {selector: 'button'})
+   
+        const searchButton = await screen.getByText(/search/i, {selector: 'button'})
     })
 
     it('Should test the character fry returns after a user searches for fry', async () => {
@@ -39,6 +39,8 @@ describe('list', () => {
         const search = screen.findByLabelText(/Search/i);
         const button = screen.findByLabelText(/button/i);
 
+
+   
         await userEvent.type(search, 'Fry');
        
         waitFor(() => {

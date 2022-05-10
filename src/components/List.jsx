@@ -27,20 +27,27 @@ export default function List(){
             const result = await res.json();
 
             const quotes = result.map((quote) => ({
+            
                 quote: quote.quote,
                 character: quote.character,
+            
             }))
             setQuotes(quotes)
+            setLoading(false)
         }
         getAllQuotes();
 
         },[]);
-    if(loading){
+
             return (
                 <>
+                {loading ? (
+                <p>Loading</p>
+                ) : (
+                    <>
                 <form onSubmit = {handleSearch}>
-                    <label>Character
-                        <input aria-label='Search' type='text' value={search} onChange={e => setSearch(e.target.value)} />
+                    <label >Character
+                        <input aria-label='Search' type='text' value={search} onChange={e => setSearch(e.target.value)}  />
                         </label>
                         <button aria-label='button'>Search</button>
                 </form>
@@ -56,12 +63,16 @@ export default function List(){
                 })
                 : quotes.map((quote, i) => {
                return(
-                <div>
+                <div key={quote.filteredQuotes}>
                 <h2>Name: {quote.character}</h2>
                 <h3>Quote: {quote.quote}</h3>
                 </div>
+              
                )
-    })
-            }
+    })}
+    </>
+    
+                 ) }
 </>
-            )}};
+
+          )};

@@ -31,13 +31,19 @@ export default function List(){
                 character: quote.character,
             }))
             setQuotes(quotes)
+            setLoading(false)
         }
         getAllQuotes();
 
         },[]);
-    if(loading){
+
+
             return (
                 <>
+                {loading ? (
+                <p>Loading</p>
+                ) : (
+                    <>
                 <form onSubmit = {handleSearch}>
                     <label>Character
                         <input aria-label='Search' type='text' value={search} onChange={e => setSearch(e.target.value)} />
@@ -60,8 +66,12 @@ export default function List(){
                 <h2>Name: {quote.character}</h2>
                 <h3>Quote: {quote.quote}</h3>
                 </div>
+              
                )
-    })
-            }
+    })}
+    </>
+    
+                 ) }
 </>
-            )}};
+
+          )};

@@ -22,28 +22,31 @@ describe('list', () => {
         await screen.findByText(/Loading/i);
       waitForElementToBeRemoved(await screen.findByText(/Loading/i));
 
-      screen.getByRole('textbox', {Name: /Bender/i})
+    screen.getByRole('textbox', {Name: /Bender/i})
      screen.getByRole('textbox', {Quote: /A grim day for robot-kind. But we can always build more killbots./i})
 
    
         const searchButton = await screen.getByText(/search/i, {selector: 'button'})
+        expect(searchButton).toBeInTheDocument();
     })
 
     it('Should test the character fry returns after a user searches for fry', async () => {
         render(<List />);
 
-        // screen.findByText(/Loading/i);
-        waitForElementToBeRemoved(await screen.getByText(/Loading/i));
+        
+        // waitForElementToBeRemoved(screen.findByText(/Loading/i));
 
         const search = screen.findByLabelText(/Search/i);
         const button = screen.findByLabelText(/button/i);
 
       userEvent.type(search, 'Fry');
+      await userEvent.click(await screen.findAllByLabelText(/button/i))
+     screen.findByText(/Fry/i)
+  
        
-        waitFor(() => {
-        const result = screen.getByLabelText(/character/i)
+        const result = await screen.findByLabelText(/character/i)
         expect(result.value).toEqual('Fry')
         })
         })
-    })
+
     

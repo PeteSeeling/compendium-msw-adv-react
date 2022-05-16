@@ -27,10 +27,8 @@ export default function List(){
             const result = await res.json();
 
             const quotes = result.map((quote) => ({
-            
                 quote: quote.quote,
                 character: quote.character,
-            
             }))
             setQuotes(quotes)
             setLoading(false)
@@ -55,15 +53,16 @@ export default function List(){
                 {search
                 ? searchedQuotes.map((quote, i) => {
                     return(
-                        <div>
+                        
+                        <div {...searchedQuotes}>
                         <h2 aria-label='character'>Name: {quote.character}</h2>
                         <h3>Quote: {quote.quote}</h3>
                         </div>
                     )
                 })
-                : quotes.map((quote, i) => {
+                : quotes.map((quote) => {
                return(
-                <div key={quote.filteredQuotes}>
+                <div {...quote.filteredQuotes}>
                 <h2>Name: {quote.character}</h2>
                 <h3>Quote: {quote.quote}</h3>
                 </div>

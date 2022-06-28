@@ -25,7 +25,6 @@ export default function List(){
         async function getAllQuotes(){
             const res = await fetch('https://futuramaapi.herokuapp.com/api/quotes');
             const result = await res.json();
-
             const quotes = result.map((quote) => ({
                 quote: quote.quote,
                 character: quote.character,
@@ -34,7 +33,6 @@ export default function List(){
             setLoading(false)
         }
         getAllQuotes();
-
         },[]);
 
             return (
@@ -66,12 +64,9 @@ export default function List(){
                 <h2>Name: {quote.character}</h2>
                 <h3>Quote: {quote.quote}</h3>
                 </div>
-              
                )
     })}
     </>
-    
                  ) }
 </>
-
           )};
